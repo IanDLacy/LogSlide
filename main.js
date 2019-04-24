@@ -4,7 +4,7 @@ const Window = require('./Window')
 const DataStore = require('./DataStore')
 const idsData = new DataStore({ name: 'ids Main' })
 const {dialog} = require('electron')
-const file = require('LogFileUtils')
+const fileAna = require('./LogFileUtils')
 const fs = require('fs')
 
 function main () {
@@ -45,17 +45,23 @@ function main () {
           return
       }
   
-      fs.readFile(filepath, 'utf-8', (err, data) => {
+      fs.readFile(fileNames[0], 'utf-8', (err, data) => {
           if(err){
               alert("An error ocurred reading the file :" + err.message);
               return
           }
-          file.processfile(data)
+          file = new fileAna(data, 2.0)
+          var lines = file.analyze()
+          for (var line in lines){
+            var fields = line.split(',')
+            for (var field in fields){
+              const updateids = idsData.addid(field).ids
+              mainWindow.send('ids', updateids)
+            }
+          }
       })
     })
   })
-
-  ipcMain.on('selected-file')
 
   ipcMain.on('add-id', (event, id) => {
     const updateids = idsData.addid(id).ids

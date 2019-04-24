@@ -1,7 +1,8 @@
-import { threadId } from "worker_threads";
+const { ipcRenderer } = require('electron')
 
 class Id_info {
     constructor(id, bus, first, lastData) {
+        this.seconds = [0]
         this.id = id
         this.bus = bus
         this.first = first
@@ -33,12 +34,26 @@ class Id_info {
         this.iChangePoints.push(0);
         this.iDatalist = [];
     }
-}
 
-function process(file){
-    var lines = file.split(/[\r\n]+/)
-    var line = ''
-    for (line in lines) {
-
+    calcSeconds() {
+        let range = Math.ceil(this.time/this.inter)
+        for(i=0;i<range;i++) {
+            this.seconds.push(i*this.inter)
+        }
     }
 }
+
+class fileAna{
+    constructor(file, interval){
+        this.file = file
+        this.interval = interval
+    }
+
+    analyze(){
+        var lines = this.file.split('\n')
+        return lines
+    }
+}
+
+module.exports = fileAna
+
