@@ -1,1 +1,1 @@
-# logslide
+electron version of log analyzer 
