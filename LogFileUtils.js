@@ -66,9 +66,11 @@ class MsgSet {
             if (first == 0){
                 first = parseFloat(fields[1].replace(
                     /[()]/g, ''))
+                    time = 0
+            }else {
+                time = parseFloat(fields[1].replace(
+                    /[()]/g, '')) - first
             }
-            time = parseFloat(fields[1].replace(
-                /[()]/g, '')) - first
             data = []
                 for(let i = 10; i < fields.length; i++) {
                     data.push(fields[i])
