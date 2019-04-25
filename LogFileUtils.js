@@ -39,8 +39,7 @@ class MsgSet {
                 msg.data.set(time, data) // data + time of occurance
             }else{
                 this.msgs.set(description, (() => {
-                    let msg = new Msg(description, fields[5], 
-                        fields[3])
+                    let msg = new Msg(fields[5], fields[3])
                     msg.data.set(time, data) // data + time of occurance
                     return msg
                 })())
@@ -50,7 +49,7 @@ class MsgSet {
 }
 
 class Msg { 
-    constructor(description, id, bus) {
+    constructor(id, bus) {
         this.description = description
         this.id = id
         this.bus = bus
