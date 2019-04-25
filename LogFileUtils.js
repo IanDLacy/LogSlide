@@ -43,17 +43,59 @@ class Id_info {
     }
 }
 
-class fileAna{
-    constructor(file, interval){
+class MsgSet {
+    constructor( file, interval ) {
         this.file = file
+        console.log(this.file)
         this.interval = interval
-    }
-
-    analyze(){
-        var lines = this.file.split('\n')
-        return lines
+        this.msgs = new Map()
+        var first = 0
+        var fields
+        var data
+        var time
+        var description
+        var lines = this.file.toString('utf-8'
+            ).split(/\r?\n/)
+        for (let i = 0; i < lines.length; i++) {
+            console.log(lines[i])
+            fields = lines[i].split( ' ' )
+            for(let i = 0; i < fields.length; i++){
+                console.log(fields[i])
+            }
+            description = fields[5] + ' ' + fields[3]
+            if (first == 0){
+                first = parseFloat(fields[1].replace(
+                    /[()]/g, ''))
+            }
+            time = parseFloat(fields[1].replace(
+                /[()]/g, '')) - first
+            data = []
+                for(let i = 10; i < fields.length; i++) {
+                    data.push(fields[i])
+                }
+            let msg = this.msgs.get(description)
+            if (msg) {
+                msg.data.set(time, data)
+            }else{
+                this.msgs.set(description, (() => {
+                    let msg = new Msg(description, fields[5], 
+                        fields[3])
+                    msg.data.set(time, data)
+                    return msg
+                })())
+            }
+        }
     }
 }
 
-module.exports = fileAna
+class Msg { 
+    constructor(description, id, bus) {
+        this.description = description
+        this.id = id
+        this.bus = bus
+        this.data = new Map()
+    }
+}
+
+module.exports = MsgSet, Msg
 

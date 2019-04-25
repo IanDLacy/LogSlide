@@ -4,7 +4,7 @@ const Window = require('./Window')
 const DataStore = require('./DataStore')
 const idsData = new DataStore({ name: 'ids Main' })
 const {dialog} = require('electron')
-const fileAna = require('./LogFileUtils')
+const MsgSet = require('./LogFileUtils')
 const fs = require('fs')
 
 function main () {
@@ -50,15 +50,7 @@ function main () {
               alert("An error ocurred reading the file :" + err.message);
               return
           }
-          file = new fileAna(data, 2.0)
-          var lines = file.analyze()
-          for (var line in lines){
-            var fields = line.split(',')
-            for (var field in fields){
-              const updateids = idsData.addid(field).ids
-              mainWindow.send('ids', updateids)
-            }
-          }
+          msgSet = new MsgSet(data, 2.0)
       })
     })
   })
