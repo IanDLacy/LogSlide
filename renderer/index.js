@@ -29,3 +29,18 @@ ipcRenderer.on('ids', (event, ids) => {
         item.addEventListener('click', deleteid)
     })
 })
+
+ipcRenderer.on('idSet', (event, ids) => {
+    const idList = document.getElementById('idList')
+
+    const idItems = ids.reduce((html, id) => {
+        html += `<li class="id-item">${id.id}</li>`
+        return html
+    }, '')
+    
+    idList.innerHTML = idItems
+
+    idList.querySelectorAll('.id-item').forEach(item => {
+        item.addEventListener('click', deleteid)
+    })
+})

@@ -13,9 +13,11 @@ class MsgSet {
         var description
         var lines = this.file.toString('utf-8' // convert buffer to 
             ).split(/\r?\n/)                   // array of lines (strings) 
-        for (let i = 0; i < lines.length; i++) {
+        for (let i = 0; i < lines.length - 1; i++) {
             fields = lines[i].split( ' ' ) // fields are delimeted by ' '
             description = fields[5] + ' ' + fields[3] // id + bus
+            console.log('desc')
+            console.log(description)
             // correct for time offset i.e zero it out
             if (first == 0){ 
                 first = parseFloat(fields[1].replace(
@@ -50,12 +52,16 @@ class MsgSet {
 
 class Msg { 
     constructor(id, bus) {
-        this.description = description
         this.id = id
         this.bus = bus
         this.data = new Map()
     }
+    
 }
+
+Msg.prototype.toString = function msgToString() {
+    return '' + this.id + ' ' + this.bus;
+  }
 
 module.exports = MsgSet, Msg
 

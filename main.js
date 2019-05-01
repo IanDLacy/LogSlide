@@ -77,9 +77,21 @@ function main () {
               alert("An error ocurred reading the file :" + err.message);
               return
           }
-          msgSet = new MsgSet(data, 2.0)
+          var msgSet = new MsgSet(data, 1.0)
+          console.log(msgSet)
+          var msgs = msgSet.msgs.values()
+          for (i=0;i<msgSet.msgs.size;i++){
+            addMsgSetIdToIds(msgs.next().value)
+          }
+
       })
     })
+  }
+
+  function addMsgSetIdToIds(value) {
+    //idsData.addIdFromSet(value).ids
+    const updateids = idsData.addid(value).ids
+    mainWindow.send('idSet', updateids)
   }
 
   ipcMain.on('add-id', (event, id) => {
