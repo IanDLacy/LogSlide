@@ -1,5 +1,5 @@
 const path = require('path')
-const {app, ipcMain} = require('electron')
+const {app, ipcMain, Menu} = require('electron')
 const Window = require('./Window')
 const DataStore = require('./DataStore')
 const idsData = new DataStore({ name: 'ids Main' })
@@ -11,6 +11,33 @@ function main () {
   let mainWindow = new Window({
     file: path.join('renderer', 'index.html')
   })
+
+  var menu = Menu.buildFromTemplate([
+    {
+      label: 'Menu',
+      submenu: [
+          {
+            label:'Open Log',
+            click() {
+              openLog()
+            }
+          },
+          {type: 'separator'},
+          {label:'Open Project'},
+          {label:'Save Project'},
+          {label:'New Project'},
+          {type: 'separator'},
+          {
+            label:'Exit',
+            click() {
+              // TOFU: if not saved, save
+              app.quit()
+            }
+          }
+      ]
+    }
+  ])
+  Menu.setApplicationMenu(menu); 
 
   let addIdWin
 
@@ -37,7 +64,7 @@ function main () {
     }
   })
 
-  ipcMain.on('open-file-dialog', function (event) {
+  function openLog() {
     dialog.showOpenDialog((fileNames) => {
       // fileNames is an array that contains all the selected
       if(fileNames === undefined){
@@ -53,7 +80,7 @@ function main () {
           msgSet = new MsgSet(data, 2.0)
       })
     })
-  })
+  }
 
   ipcMain.on('add-id', (event, id) => {
     const updateids = idsData.addid(id).ids

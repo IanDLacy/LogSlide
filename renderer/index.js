@@ -1,10 +1,6 @@
 const { ipcRenderer } = require('electron')
 const selectDirBtn = document.getElementById('open')
 
-selectDirBtn.addEventListener('click', function (event) {
-    ipcRenderer.send('open-file-dialog')
-})
-
 ipcRenderer.on('selected-file', function (event, path) {
     document.getElementById('selected-file').innerHTML = `&#9658; ${path}`
     document.getElementById('selected-file2').innerHTML = `${path}`
@@ -17,10 +13,6 @@ const deleteid = (e) => {
 
 document.getElementById('createidBtn').addEventListener('click', () => {
     ipcRenderer.send('add-id-window')
-})
-
-document.getElementById('open').addEventListener('click', () => {
-    ipcRenderer.send('open-file-dialogue')
 })
 
 ipcRenderer.on('ids', (event, ids) => {
