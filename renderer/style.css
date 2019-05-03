@@ -1,36 +1,110 @@
+html {
+    height: 100%;
+    padding: 0px;
+    overflow: hidden;
+}
+
 body {
-    color: rgb(219, 219, 219);
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+    font-family: Helvetica, sans-serif;
     background-color: rgb(54, 54, 54);
 }
-
-button {
-    margin: 1rem
-}
-
-div.col-1 {
+#bodygrid {
     height: 100%;
-    width: 25%;
-    min-width: 18rem;
-
+    padding: 0px;
+    margin: 0px;
+    display: grid;
+    grid-template-areas: 
+        "sidebar msgbox plots"
+        "sidebar msgbox options"
+        "footer footer footer";
+    grid-template-columns: 3rem 0px auto;
+    grid-template-rows: 1fr 8rem 1.3rem;
 }
 
-div.listbox {
-    height: 70%;
-    min-height: 30rem;
-    width: 20%;
-    min-width: 10rem;
-    max-width: 20rem;
-    color: rgb(219, 219, 219);
-    background-color: rgb(66, 66, 66);
+div {
+    border-color: rgb(43, 43, 43);
+    border-right: 0.2px solid;
+    border-bottom: 0.2px solid;
+}
+
+.sidebar {    
+    grid-area: sidebar;
+    display: grid;
+    grid-template-areas: 
+        'msghide'
+        '.';
+    grid-template-columns: auto;
+    grid-template-rows: 3rem auto;
+}
+
+.hidebtn {
+    grid-area: 'mshide';
+    background-color: rgb(37, 37, 37);
+}
+
+#messages {
+    grid-area: msgbox;
+    display: none;
+    grid-template-areas: 
+        'msgheaddiv'
+        'msglistdiv'
+        'msgfooter';
+    grid-template-columns: auto;
+    grid-template-rows: 3rem auto 1.3rem;
+    background-color: rgb(46, 46, 46);
+}
+
+.msgheaddiv {
+    border-right: 0px solid;
+    border-bottom: 0px solid;
+    color: white;
+}
+
+.msghead {
+    padding: 0px;
+    margin: 1rem;
+    float: left;
+}
+
+.addidbtn {
+    padding: 0.5rem;
+    margin: 1rem;
+    margin-top: 0.5rem;
+    float: right;
+    background-color: rgb(63, 63, 63);
+    color: white;
+}
+
+.msgfooter {
+    background-color: rgb(61, 61, 61);
+}
+
+.options {
+    grid-area: options;
+    border-right: 0px solid;
+    background-color: rgb(61, 61, 61);
+}
+
+
+.plots  {
+    grid-area: plots;
+    border-right: 0px solid;
+}
+
+.footer {    
+    grid-area: footer;
+    background-color: rgb(37, 37, 37);
+    border-bottom: 0px solid;
+}
+
+.listbox {
     overflow-y: scroll;
-    padding-right: 40px;
     box-sizing: content-box; 
 }
 
 ul {
     list-style: none;
-}
-
-body {
-    font: caption;
 }
