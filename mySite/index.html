@@ -2,19 +2,46 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="styles.css">
-
+        <style>
+            #IansCursor {
+                display: inline-block;
+                width: 0.25em;
+                height: 1.25em;
+                vertical-align: middle;
+                background-color: black;
+                transition: opacity 0.5s;
+                transition-timing-function: linear;
+                opacity: 0;
+            }
+            #Bork1,#Bork2,#Bork3,#But {
+                opacity: 0;
+                transition: opacity 0.5s;
+                transition-timing-function: linear;
+            }
+            #main {
+                opacity: 0;
+                transition: opacity 1s;
+                transition-timing-function: linear;
+                text-align: center;
+            }
+        </style>
     </head>
     <body>
         <div id="maingrid">
 
             <div id="banner">
                 <iframe src="p5/p5.html" scrolling="no"></iframe>
+                
             </div>
 
             <div id="sidebar">
+                
             </div>
 
             <div id="main">                
+                    <h1>Pip and the whole gang <i>are</i> pretty cool! <span id="IansCursor"></span></h1>
+                    <h1><span id="But">But let's wait a few (5) seconds for Ricky to stop--</span></h1>
+                    <h1><span id="Bork1">bork, </span><span id="Bork2">bork, </span><span id="Bork3">borking!</span></h1>
             </div>
 
             <div id="footer">                
@@ -22,7 +49,36 @@
 
         </div>
 
-        <script src="scripts.js"></script>
+        <script>
+            function blink()
+                     {
+                        var obj = document.getElementById("IansCursor");
+                        if ( obj.style.opacity == 1 ){ obj.style.opacity = 0 }
+                        else                         { obj.style.opacity = 1 }
+                     }
+
+            function but()
+                     {
+                         document.getElementById("But").style.opacity=1;
+                     }
+
+            function bork()
+                     {
+                        setTimeout(function(){document.getElementById("Bork1").style.opacity=1}, 250);
+                        setTimeout(function(){document.getElementById("Bork2").style.opacity=1}, 500);
+                        setTimeout(function(){document.getElementById("Bork3").style.opacity=1}, 750);
+                     }            
+
+            function start()
+                     {
+                        document.getElementById("main").style.opacity=1;
+                        setInterval(blink, 500);
+                        setTimeout(but, 2500);
+                        setTimeout(bork, 7500);
+                     }
+                     
+            setTimeout(start, 500);
+        </script>
         
     </body>
 </html>
