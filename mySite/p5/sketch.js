@@ -9,7 +9,7 @@ gap = 30;
 charr = []
 let phrases = [
     'hey there, buddy...',
-    "hows's things?",
+    "how's things?",
     "wow. pippy really is a great pup!"
 ]
 
@@ -17,7 +17,7 @@ function setup() {
     createCanvas(windowWidth, windowHeight);    
     textFont("inconsolata");
     textSize(fontsize);
-    frameRate(7)
+    frameRate(8)
     textAlign(CENTER, CENTER);
 }
 
@@ -29,7 +29,7 @@ function draw() {
         text(phrases[phrase].charAt(char), 20 + gap * char, 40);
     }
     if (i != phrases[phrase].length) {
-        frameRate(7)
+        frameRate(8)
         i++;
         rect(10 + gap* char, 10, 5, 50)
         fill(0,0,0)
