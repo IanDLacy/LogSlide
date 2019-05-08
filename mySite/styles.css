@@ -1,0 +1,56 @@
+html {
+    height: 100%;
+    padding: 0px;
+    overflow: hidden;
+}
+
+body {
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+    font-family: Helvetica, sans-serif;
+}
+#maingrid {
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+    display: grid;
+    grid-template-areas: 
+        "banner banner banner"
+        "main main sidebar"
+        "footer footer footer";
+    grid-template-columns: 2fr 2fr 1fr;
+    grid-template-rows: 20rem 4fr 1fr;
+}
+
+#banner{
+    grid-area: banner;
+    overflow: hidden;
+    padding-top: 56.25%;
+}
+
+#banner iframe {
+    overflow:hidden;
+    border: 0;
+    height: 20rem;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+#sidebar{
+    grid-area: sidebar;
+    background-color: rgb(110, 110, 110);
+}
+
+#main{
+    grid-area: main;
+    background-color: rgb(161, 161, 161);
+}
+
+#footer{
+    grid-area:  footer;
+    background-color: rgb(207, 207, 207);
+}
+
