@@ -23,18 +23,18 @@ function setup() {
 function draw() {
     windowResized()
     frameRate(7)
-    background(160);
+    background(190);
     var char
     for(char = 0; char <= i; char++) {
         text(phrases[phrase].charAt(char), 20 + gap * char, 40);
     }
     if (i != phrases[phrase].length) {
         i++;
-        rect(10 + gap * char, 10, 5, 50)
+        rect(10 + gap* char, 10, 5, 50)
         fill(0,0,0)
     }else{
         if (cursor){
-            rect(10 + gap * char, 10, 5, 50)
+            rect(10 + (gap -1) * char, 10, 5, 50)
             fill(0,0,0)
             waited++
             cursor = false;
