@@ -2,8 +2,8 @@ let font,
   fontsize = 60;
 phrase = 0;
 i = 0;
-cursor = true;
-cursorwait = 10;
+cursor = false;
+cursorwait = 3;
 waited = 0;
 gap = 30;
 charr = []
@@ -17,22 +17,24 @@ function setup() {
     createCanvas(windowWidth, windowHeight);    
     textFont("inconsolata");
     textSize(fontsize);
+    frameRate(7)
     textAlign(CENTER, CENTER);
 }
 
 function draw() {
     windowResized()
-    frameRate(7)
     background(190);
     var char
     for(char = 0; char <= i; char++) {
         text(phrases[phrase].charAt(char), 20 + gap * char, 40);
     }
     if (i != phrases[phrase].length) {
+        frameRate(7)
         i++;
         rect(10 + gap* char, 10, 5, 50)
         fill(0,0,0)
     }else{
+        frameRate(2)
         if (cursor){
             rect(10 + (gap -1) * char, 10, 5, 50)
             fill(0,0,0)
